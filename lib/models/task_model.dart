@@ -1,7 +1,8 @@
-class Task{
+class Task {
   final String title;
-  final bool isDone;
+  bool isDone;
+  final String taskCategory;
+  final DateTime date = DateTime.now();
 
-  Task({required this.title, required this.isDone});
-
+  Task({required this.title, this.isDone = false, required this.taskCategory});
 }
