@@ -1,5 +1,5 @@
 class Task {
-  final String title;
+  late String title;
   bool isDone;
   final String taskCategory;
   final DateTime date = DateTime.now();

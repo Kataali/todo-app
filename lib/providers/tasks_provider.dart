@@ -30,6 +30,11 @@ class TasksProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void editTask(Task task, String title) {
+    task.title = title;
+    notifyListeners();
+  }
+
   int get tasksListsLength => tasksList.length;
   Task getTaskByIndex(int index) => tasksList[index];
 }

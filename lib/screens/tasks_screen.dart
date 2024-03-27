@@ -4,6 +4,8 @@ import 'package:todo_app/providers/tasks_provider.dart';
 import 'package:todo_app/screens/add_task_screen.dart';
 import 'package:todo_app/widgets/task_tile.dart';
 
+import 'edit_task_screen.dart';
+
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
@@ -16,14 +18,6 @@ class TasksScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(children: [
           const Text("Future"),
-          // Expanded(
-          //   child: ListView(
-          //     children: [
-          //       TaskTile(taskTitle: "Do Groceries", date: DateTime.now()),
-          //       TaskTile(taskTitle: "Do homework", date: DateTime.now())
-          //     ],
-          //   ),
-          // )
           Consumer<TasksProvider>(
             builder:
                 (BuildContext context, TasksProvider value, Widget? child) {
@@ -39,6 +33,14 @@ class TasksScreen extends StatelessWidget {
                       },
                       deleteTaskFunc: () {
                         value.deleteTask(value.tasksList[index]);
+                      },
+                      editTaskFunc: () {
+                        showModalBottomSheet(
+                          isDismissible: true,
+                          context: context,
+                          builder: (BuildContext context) =>
+                              EditTaskScreen(task: value.tasksList[index]),
+                        );
                       },
                     );
                   },

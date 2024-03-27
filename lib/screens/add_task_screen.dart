@@ -6,6 +6,7 @@ import '../providers/tasks_provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
   final titleController = TextEditingController();
+  static GlobalKey<FormState> _addtaskScreenFormKey = GlobalKey<FormState>();
 
   AddTaskScreen({super.key});
 
@@ -16,10 +17,13 @@ class AddTaskScreen extends StatelessWidget {
     return Column(
       children: [
         const Text("Add New Task"),
-        TextFormField(
-          controller: titleController,
-          decoration: const InputDecoration(
-            label: Text("Task Title"),
+        Form(
+          key: _addtaskScreenFormKey,
+          child: TextFormField(
+            controller: titleController,
+            decoration: const InputDecoration(
+              label: Text("Task Title"),
+            ),
           ),
         ),
         TextButton(
@@ -27,6 +31,7 @@ class AddTaskScreen extends StatelessWidget {
             Task newTask =
                 Task(title: titleController.value.text, taskCategory: "home");
             provider.addTask(newTask);
+            _addtaskScreenFormKey.currentState?.save();
             titleController.clear();
             Navigator.pop(context);
           },
